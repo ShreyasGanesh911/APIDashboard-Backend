@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config()
 const user = require("../Model/User.model");
 const AsyncHandler = require("../Utils/AsyncHandler");
 const ErrorHandler = require("../Utils/ErrorHandler");
@@ -18,7 +19,7 @@ const loginUser = AsyncHandler(async(req,res,next)=>{
         return next(new ErrorHandler("User doesn't exist",404))
     console.log(responce)
     if(responce.password === password){
-         const AuthToken = jwt.sign({responce},"123456789",{expiresIn:"1d"})
+         const AuthToken = jwt.sign({responce},process.env.JWT_KEY,{expiresIn:"1d"})
         return res.cookie('AuthToken',AuthToken).status(200).json({success:true,message:"User logged in"})
     }
         

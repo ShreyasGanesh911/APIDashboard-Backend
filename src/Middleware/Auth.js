@@ -5,7 +5,7 @@ require('dotenv').config()
 const auth = async(req,res,next)=>{
 try{
     const {AuthToken} = req.cookies
-    jwt.verify(AuthToken,process.env.JWTKEY,async(err,users)=>{
+    jwt.verify(AuthToken,process.env.JWT_KEY,async(err,users)=>{
         if(err){
          res.clearCookie('AuthToken')
          return next(new ErrorHandler("Invalid token",401))
