@@ -3,12 +3,17 @@ const mongoose = require("mongoose");
 const keySchema =  new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"user"
+        ref:"user",
+        unique:false
     },
-    key:{
+    APIkey:{
         type:String,
         unique:true,
         required:[true,"Key not provided"]
+    },
+    requests:{
+        type:Number,
+        default:0
     }
 })
 

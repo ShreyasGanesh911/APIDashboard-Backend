@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema({
         type:Number,
         unique:true,
         required:[true,"Phone number not provided"]
+    },
+    date:{
+        type:Date,
+        default:Date.now()
+    },
+    endDate:{
+        type:Date,
+        default:() => new Date(+new Date() + 30*24*60*60*1000)
+    },
+    requests:{
+        type:Number,
+        default:0
     }
 })
 
