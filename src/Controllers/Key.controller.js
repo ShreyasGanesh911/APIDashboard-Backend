@@ -3,16 +3,15 @@ const ErrorHandler = require("../Utils/ErrorHandler");
 const key = require("../Model/APIKey.model");
 
 const getAPIKeys = AsyncHandler(async(req,res,next)=>{
-    const {_id} = req.body
-    // const {_id} = req.user
+    console.log(req.users)
+     const {_id} = req.users
     const user = _id
     const responce = await key.find({user}).populate('user')
     res.status(200).json({success:true,message:"Keys found ",responce})
 })
 
 const createKey = AsyncHandler(async(req,res,next)=>{
-    const {_id} = req.body
-    //const {_id} = req.user
+    const {_id} = req.users
     const user = _id
     const random = Math.ceil(Math.random()*1000000)
     console.log(random)

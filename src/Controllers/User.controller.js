@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const user = require("../Model/User.model");
 const AsyncHandler = require("../Utils/AsyncHandler");
 const ErrorHandler = require("../Utils/ErrorHandler");
@@ -15,8 +16,12 @@ const loginUser = AsyncHandler(async(req,res,next)=>{
     const responce = await user.findOne({email})
     if(!responce)
         return next(new ErrorHandler("User doesn't exist",404))
-    if(responce.password === password)
-        return res.status(200).json({success:true,message:"User logged in"})
+    console.log(responce)
+    if(responce.password === password){
+         const AuthToken = jwt.sign({responce},"123456789",{expiresIn:"1d"})
+        return res.cookie('AuthToken',AuthToken).status(200).json({success:true,message:"User logged in"})
+    }
+        
     next(new ErrorHandler("Incorrect credentials",401))
 })
 
