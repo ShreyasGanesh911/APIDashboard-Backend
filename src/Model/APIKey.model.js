@@ -8,7 +8,7 @@ const keySchema =  new mongoose.Schema({
     key:{
         type:String,
         unique:true,
-        require:[true,"Key not provided"]
+        required:[true,"Key not provided"]
     }
 })
 
