@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken")
 const ErrorHandler = require("../Utils/ErrorHandler")
 const user = require("../Model/User.model")
+require('dotenv').config()
 const auth = async(req,res,next)=>{
 try{
     const {AuthToken} = req.cookies
-    jwt.verify(AuthToken,'123456789',async(err,users)=>{
+    jwt.verify(AuthToken,process.env.JWTKEY,async(err,users)=>{
         if(err){
          res.clearCookie('AuthToken')
          return next(new ErrorHandler("Invalid token",401))
