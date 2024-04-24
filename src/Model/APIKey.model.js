@@ -6,6 +6,14 @@ const keySchema =  new mongoose.Schema({
         ref:"user",
         unique:false
     },
+    tag:{
+        type:String,
+        required:[true,'Name not provided']
+    },
+    active:{
+        type:Boolean,
+        default:true
+    },
     APIkey:{
         type:String,
         unique:true,
