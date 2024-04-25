@@ -13,10 +13,12 @@ const getAPIKeys = AsyncHandler(async(req,res,next)=>{
 
 const createKey = AsyncHandler(async(req,res,next)=>{
     const {_id} = req.users
+    const {tag} = req.body
+    
     const user = _id
     const random = Math.ceil(Math.random()*1000000)
     console.log(random)
-    const responce = await key.create({user,APIkey:random+1000000})
+    const responce = await key.create({user,APIkey:tag,tag})
     console.log(responce)
     res.status(200).json({success:true,message:"Keys created ",responce})
 })
