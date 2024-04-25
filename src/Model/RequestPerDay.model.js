@@ -12,7 +12,7 @@ const requestSchema = new mongoose.Schema({
     },
     requests:{
         type:Number,
-        default:0
+        default:1
     }
 
 })
