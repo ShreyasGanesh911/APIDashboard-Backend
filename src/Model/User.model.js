@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
     phone:{
         type:Number,
         unique:true,
-        required:[true,"Phone number not provided"]
     },
     date:{
         type:Date,

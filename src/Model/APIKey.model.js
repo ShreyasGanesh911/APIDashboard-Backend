@@ -16,7 +16,6 @@ const keySchema =  new mongoose.Schema({
     },
     APIkey:{
         type:String,
-        unique:true,
         required:[true,"Key not provided"]
     },
     requests:{
