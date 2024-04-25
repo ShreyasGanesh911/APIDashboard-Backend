@@ -3,12 +3,14 @@ require("dotenv").config()
 const user = require("../Model/User.model");
 const AsyncHandler = require("../Utils/AsyncHandler");
 const ErrorHandler = require("../Utils/ErrorHandler");
+const key = require("../Model/APIKey.model");
+const request = require("../Model/RequestPerDay.model");
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
 const createUser = AsyncHandler(async(req,res,next)=>{
     const {phone,name,email,password} = req.body
-
     const responce = await user.create({email,name,password,phone})
-    console.log(responce)
+    const{_id} = responce
+    const api = await key.create({user:_id,tag:"First key",APIkey:"First key"})
     res.status(201).json({success:true,message:"User created",responce})
 })
 
@@ -17,10 +19,10 @@ const loginUser = AsyncHandler(async(req,res,next)=>{
     const responce = await user.findOne({email})
     if(!responce)
         return next(new ErrorHandler("User doesn't exist",404))
-    console.log(responce)
+
     if(responce.password === password){
          const AuthToken = jwt.sign({responce},process.env.JWT_KEY,{expiresIn:"1d"})
-        return res.cookie('AuthToken',AuthToken).status(200).json({success:true,message:"User logged in"})
+        return res.cookie('AuthToken',AuthToken,{httpOnly:true,sameSite:"none",secure:true}).status(200).json({success:true,message:"User logged in"})
     }
         
     next(new ErrorHandler("Incorrect credentials",401))
@@ -29,11 +31,16 @@ const aboutUser = AsyncHandler(async(req,res,next)=>{
     const date = new Date()
     const {_id} = req.users
     const responce = await user.findById({_id}).select('-password')
+    const keys = await key.find({user:_id})
+  
     const result = {
         name:responce.name,
-        start:`${responce.date.getDate()}-${month[responce.date.getMonth()]}`,
-        end:`${responce.endDate.getDate()}-${month[responce.endDate.getMonth()]}`,
-        remaining:Math.floor((responce.endDate.getTime()-date.getTime() )/(1000 * 60 * 60 * 24))
+        start:`${responce.date.getDate()}-${month[responce.date.getMonth()]}-${responce.date.getFullYear()}`,
+        end:`${responce.endDate.getDate()}-${month[responce.endDate.getMonth()]}-${responce.date.getFullYear()}`,
+        remaining:Math.ceil((responce.endDate.getTime()-date.getTime() )/(1000 * 60 * 60 * 24)),
+        requests:responce.requests,
+        keys,
+        totalKeys:keys.length
     }
     res.status(200).json({success:true,responce:result})
 })
