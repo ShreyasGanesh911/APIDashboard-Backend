@@ -8,7 +8,6 @@ const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oc
 const date = new Date()
 const makeRequest = AsyncHandler(async(req,res,next)=>{
     const {authKey} = req.query
-    console.log(authKey)
     let responce
     try{
          responce = await key.findOneAndUpdate({_id:authKey},{$inc:{requests:1}})
@@ -23,14 +22,7 @@ const makeRequest = AsyncHandler(async(req,res,next)=>{
     if(!reqResponce){
         await request.create({user:responce.user,date:newDate})
     }
-    console.log(responce)
-    console.log(userResponce)
-    console.log(reqResponce)
-    res.send({status:"ok",totalResults:30,result})
+    res.status(200).json({status:"ok",totalResults:30,result})
 })
 
 module.exports = {makeRequest}
-
-//"status": "error",
-//"code": "apiKeyInvalid",
-//"message": "Your API key is invalid or incorrect. Check your key, or go to https://newsapi.org to create a free API key."
