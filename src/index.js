@@ -1,7 +1,7 @@
-const app = require("./src/app.js");
+const app = require("./app.js");
 require("dotenv").config()
 const PORT = process.env.PORT || 4000
-const connection = require("./src/database/index.js");
+const connection = require("./database/index.js");
 
 connection().then(()=>{
     app.listen(PORT,()=>{
