@@ -45,4 +45,9 @@ const aboutUser = AsyncHandler(async(req,res,next)=>{
     res.status(200).json({success:true,responce:result})
 })
 
-module.exports = {createUser,loginUser,aboutUser}
+const logout = AsyncHandler(async(req,res,next)=>{
+    res.clearCookie("AuthToken").status(200).json({success:true,message:"User logged out"});
+    
+})
+
+module.exports = {createUser,loginUser,aboutUser,logout}
