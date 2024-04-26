@@ -1,6 +1,6 @@
 const express = require ('express')
 const APIError = require('./Utils/APIError')
-const userRouter = require('./Routes/User.router')
+const userRouter = require('./Routes/User.router.js')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const app = express()
