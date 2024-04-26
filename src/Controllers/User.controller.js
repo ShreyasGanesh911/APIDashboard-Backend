@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config()
-const user = require("../Model/User.model");
-const AsyncHandler = require("../Utils/AsyncHandler");
-const ErrorHandler = require("../Utils/ErrorHandler");
-const key = require("../Model/APIKey.model");
-const request = require("../Model/RequestPerDay.model");
+const user = require("../Model/User.model.js");
+const AsyncHandler = require("../Utils/AsyncHandler.js");
+const ErrorHandler = require("../Utils/ErrorHandler.js");
+const key = require("../Model/APIKey.model.js");
+const request = require("../Model/RequestPerDay.model.js");
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
 const createUser = AsyncHandler(async(req,res,next)=>{
     const {phone,name,email,password} = req.body

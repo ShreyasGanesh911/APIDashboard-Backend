@@ -1,8 +1,8 @@
-const AsyncHandler = require("../Utils/AsyncHandler");
-const ErrorHandler = require("../Utils/ErrorHandler");
-const key = require("../Model/APIKey.model");
-const user = require("../Model/User.model");
-const request = require("../Model/RequestPerDay.model");
+const AsyncHandler = require("../Utils/AsyncHandler.js");
+const ErrorHandler = require("../Utils/ErrorHandler.js");
+const key = require("../Model/APIKey.model.js");
+const user = require("../Model/User.model.js");
+const request = require("../Model/RequestPerDay.model.js");
 const result = require("../Public/responce.json")
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
 const date = new Date()

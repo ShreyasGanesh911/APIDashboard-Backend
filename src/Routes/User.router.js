@@ -1,8 +1,8 @@
 const express = require("express")
-const { createUser, loginUser ,aboutUser, logout} = require("../Controllers/User.controller")
-const { getAPIKeys, createKey, deleteKey, APIRequests } = require("../Controllers/Key.controller")
-const auth = require("../Middleware/Auth")
-const { makeRequest } = require("../Controllers/API.controller")
+const { createUser, loginUser ,aboutUser, logout} = require("../Controllers/User.controller.js")
+const { getAPIKeys, createKey, deleteKey, APIRequests } = require("../Controllers/Key.controller.js")
+const auth = require("../Middleware/Auth.js")
+const { makeRequest } = require("../Controllers/API.controller.js")
 const userRouter = express.Router()
 
 userRouter.post('/signup',createUser)

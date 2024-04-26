@@ -1,7 +1,7 @@
-const AsyncHandler = require("../Utils/AsyncHandler");
-const ErrorHandler = require("../Utils/ErrorHandler");
-const key = require("../Model/APIKey.model");
-const request = require("../Model/RequestPerDay.model");
+const AsyncHandler = require("../Utils/AsyncHandler.js");
+const ErrorHandler = require("../Utils/ErrorHandler.js");
+const key = require("../Model/APIKey.model.js");
+const request = require("../Model/RequestPerDay.model.js");
 
 const getAPIKeys = AsyncHandler(async(req,res,next)=>{
      const {_id} = req.users
