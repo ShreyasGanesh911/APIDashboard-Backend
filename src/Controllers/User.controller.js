@@ -37,7 +37,7 @@ const aboutUser = AsyncHandler(async(req,res,next)=>{
         name:responce.name,
         start:`${responce.date.getDate()}-${month[responce.date.getMonth()]}-${responce.date.getFullYear()}`,
         end:`${responce.endDate.getDate()}-${month[responce.endDate.getMonth()]}-${responce.date.getFullYear()}`,
-        remaining:Math.ceil((responce.endDate.getTime()-date.getTime() )/(1000 * 60 * 60 * 24)),
+        remaining:Math.floor((responce.endDate.getTime()-date.getTime() )/(1000 * 60 * 60 * 24)),
         requests:responce.requests,
         keys,
         totalKeys:keys.length
